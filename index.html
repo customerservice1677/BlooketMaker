@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="monetag" content="da143773c0582e6c6596fcb345de2dc6">
+  <meta name="coinzilla" content="f038cad709ce16d23443a6a54db32238" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2039352924232379"
+     crossorigin="anonymous"></script>
+  <script type="text/javascript"> adroll_adv_id = "KVMJ5Y6YW5ACXCSQN3BQQ7"; adroll_pix_id = "XZW7W3NEW5CXBMLI6MSKFZ"; adroll_version = "2.0";  (function(w, d, e, o, a) { w.__adroll_loaded = true; w.adroll = w.adroll || []; w.adroll.f = [ 'setProperties', 'identify', 'track', 'identify_email', 'get_cookie' ]; var roundtripUrl = "https://s.adroll.com/j/" + adroll_adv_id + "/roundtrip.js"; for (a = 0; a < w.adroll.f.length; a++) { w.adroll[w.adroll.f[a]] = w.adroll[w.adroll.f[a]] || (function(n) { return function() { w.adroll.push([ n, arguments ]) } })(w.adroll.f[a]) }  e = d.createElement('script'); o = d.getElementsByTagName('script')[0]; e.async = 1; e.src = roundtripUrl; o.parentNode.insertBefore(e, o); })(window, document); adroll.track("pageView"); </script> 
+  
+  <title>Blooket CSV Generator</title>
+  <style>
+    :root {
+      --primary: #3a86ff;
+      --bg: #f9fafb;
+      --card-bg: #ffffff;
+      --text: #1f2937;
+      --border: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 700px;
+      width: 100%;
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tooltip-container {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .tooltip-icon {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-color: var(--primary);
+      color: white;
+      text-align: center;
+      border-radius: 50%;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 20px;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+
+    .tooltip-icon:hover {
+      background-color: #2a6ed1;
+    }
+
+    .tooltip-box {
+      visibility: hidden;
+      opacity: 0;
+      width: 1000px;
+      max-width: 400px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #1f2937;
+      text-align: left;
+      border-radius: 1rem;
+      padding: 1rem;
+      position: absolute;
+      top: 2.5rem;
+      left: 0;
+      z-index: 10;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(200, 200, 200, 0.4);
+      transition: opacity 0.3s ease;
+    }
+
+    .tooltip-container:hover .tooltip-box,
+    .tooltip-container:focus-within .tooltip-box {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .tooltip-box::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      border: 6px solid transparent;
+      border-bottom-color: rgba(255, 255, 255, 0.8);
+      filter: drop-shadow(0 -1px 1px rgba(0,0,0,0.05));
+    }
+
+    .tooltip-box code {
+      background: #f3f4f6;
+      display: block;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      font-family: monospace;
+      font-size: 0.9rem;
+      white-space: pre-wrap;
+      margin-top: 0.5rem;
+    }
+
+    textarea {
+      width: 100%;
+      margin-top: 1rem;
+      padding: 1rem;
+      font-size: 1rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--border);
+      resize: vertical;
+      background: #fcfcfc;
+      font-family: monospace;
+    }
+
+    button {
+      display: inline-block;
+      margin-top: 1.25rem;
+      padding: 0.75rem 1.25rem;
+      background-color: var(--primary);
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #2a6ed1;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 1.5rem;
+      }
+      .tooltip-box {
+        visibility: hidden;
+        opacity: 0;
+        width: 100%;
+        min-width: 300px;
+        max-width: 1000px; /* Increase width here */
+        background: rgba(200, 200, 200, 0.85);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        color: #1f2937;
+        text-align: left;
+        border-radius: 1rem;
+        padding: 1.25rem;
+        position: absolute;
+        top: 2.8rem;
+        left: 0;
+        z-index: 10;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(200, 200, 200, 0.3);
+        transition: opacity 0.3s ease;
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>
+      Blooket Quiz Generator
+      <span class="tooltip-container" tabindex="0">
+        <div class="tooltip-icon">?</div>
+        <div class="tooltip-box">
+          <strong>Formatting Example:</strong>
+          <code>
+Question: What is 2+2?
+Answer1: 4
+Answer2: 5
+Answer3: 1
+Answer4: 7
+Time: 20
+Correct: 1
+
+          </code>
+          <strong>
+          If you want to have more than one correct answer, mark it with commas, ie</strong>
+          <code>
+            Question: What is 2+2?
+            Answer1: 4
+            Answer2: 3
+            Answer3: 1
+            Answer4: four
+            Time: 20
+            Correct: 1, 4
+          </code>
+          <p style="margin: 0.5rem 0 0; font-style: none;">• Time is in seconds<br>• Correct answers use numbers (1–4), comma-separated for multiple<br>• If you only want 2 or 3 questions, don't put in answer4/answer3<br>• Time is not mandatory; you can leave it blank</p>
+        </div>
+      </span>
+    </h1>
+
+    <textarea id="input" rows="12" placeholder="Paste your quiz questions here..."></textarea>
+    <button onclick="generateCSV()">Download Blooket CSV</button>
+  </div>
+
+  <script>
+    function generateCSV() {
+      const input = document.getElementById("input").value.trim();
+      const blocks = input.split(/\n\s*\n/); // blank-line-separated blocks
+
+      const rows = [
+        ["", "", "", "", "", "", "", ""], // Row 1: empty
+        ["", "Question Text", "Answer 1", "Answer 2", "Answer 3", "Answer 4", "Time Limit (sec)", "Correct Answer(s)"] // Row 2: header
+      ];
+
+      blocks.forEach(block => {
+        const lines = block.split('\n');
+        let q = "", a1 = "", a2 = "", a3 = "", a4 = "", time = "20", correct = "";
+
+        for (const line of lines) {
+          const [key, ...rest] = line.split(':');
+          const val = rest.join(':').trim();
+          if (/^question/i.test(key)) q = val;
+          else if (/^answer1/i.test(key)) a1 = val;
+          else if (/^answer2/i.test(key)) a2 = val;
+          else if (/^answer3/i.test(key)) a3 = val;
+          else if (/^answer4/i.test(key)) a4 = val;
+          else if (/^time/i.test(key)) time = val;
+          else if (/^correct/i.test(key)) correct = val;
+        }
+
+        if (q && a1 && a2 && correct) {
+          rows.push(["", q, a1, a2, a3, a4, time, correct]);
+        }
+      });
+
+      const csv = rows.map(r =>
+        r.map(cell => `"${cell.replace(/"/g, '""')}"`).join(",")
+      ).join("\n");
+
+      const blob = new Blob([csv], { type: "text/csv" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "blooket-import.csv";
+      link.click();
+    }
+  </script>
+  <script src="https://fpyf8.com/88/tag.min.js" data-zone="148360" async data-cfasync="false"></script>
+</body>
+</html>
